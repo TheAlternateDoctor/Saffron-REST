@@ -10,7 +10,14 @@ router.get('/', function (req, res, next) {
   let users = User.findAll(db).then((result)=>{
     res.send(JSON.stringify(result));
   }).catch((error)=>{
-
+    if (error === "result") {
+      res.statusCode = 404;
+      res.send('{"note":"No users, wtf"}');
+    } else {
+      res.statusCode = 500;
+      res.send('{"note":"MySQL error.",' +
+        '"error":'+JSON.stringify(error) + '}');
+    }
   });
 });
 
@@ -29,7 +36,7 @@ router.get('/:uid', function (req, res, next) {
     } else {
       res.statusCode = 500;
       res.send('{"note":"MySQL error.",' +
-        +JSON.stringify(error) + '}');
+        '"error":'+JSON.stringify(error) + '}');
     }
   });
 });
