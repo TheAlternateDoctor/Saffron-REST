@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Keycloak configuration file
+**/keycloak.json
+
+#Database file
+database/db.json

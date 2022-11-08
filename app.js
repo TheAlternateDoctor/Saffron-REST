@@ -1,11 +1,17 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const session = require("express-session");
+const Keycloak = require("keycloak-connect");
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+
+//No auth, can act very simply
+const indexRouter = require('./routes/index');
+
+//Has auth, so we need to make it a class
+const UsersRouter = require('./routes/UsersRouter');
 
 var app = express();
 
@@ -19,8 +25,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+const memoryStore = new session.MemoryStore();
+const auth = new Keycloak({store: this.memoryStore});
+app.use(auth.middleware());
+
+const usersRouter = new UsersRouter(auth);
+
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/users', usersRouter.getRoutes());
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

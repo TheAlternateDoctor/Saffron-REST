@@ -17,6 +17,7 @@ User = class {
                     let users = new Array();
                     result.forEach(element => {
                         users.push({
+                            id : element.id,
                             username : element.username,
                             discordHandle : element.discord,
                             youtubeHandle : element.youtube,
