@@ -36,9 +36,12 @@ public class ModController {
     @GetMapping(value = "/mods")
     public List<Mods> getMods(
         @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size){
+        @RequestParam(defaultValue = "10") int size,
+        @RequestParam(required=false) String name,
+        @RequestParam(required=false) Boolean legacy,
+        @RequestParam(required=false) Integer game){
         Pageable paging = PageRequest.of(page, size);
-        Page<Mods> mods = modsRepository.findAll(paging);
+        Page<Mods> mods = modsRepository.findSorted(paging, name, legacy, game);
         return mods.getContent();
     }
 
