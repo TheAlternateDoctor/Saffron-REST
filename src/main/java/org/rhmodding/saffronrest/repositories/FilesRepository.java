@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface FilesRepository extends JpaRepository<Files, Integer>{
     
-    @Query("FROM Files f WHERE f.modID = ?1")
+    @Query("FROM Files f WHERE f.mod.id = ?1")
     List<Files> findByModId(Integer modId);
 }

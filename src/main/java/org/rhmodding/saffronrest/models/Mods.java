@@ -29,4 +29,7 @@ public class Mods {
 
     @OneToMany(mappedBy = "mod")
     private List<Authors> authors;
+
+    @OneToMany(mappedBy = "mod")
+    private List<Files> files;
 }
