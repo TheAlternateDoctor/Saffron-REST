@@ -12,8 +12,6 @@ public interface ModsRepository extends JpaRepository<Mods, Integer> {
     
     @Query("From Mods m " +
     "where (:name IS NULL OR m.name LIKE %:name%)"+
-    "and (:legacy IS NULL OR m.isLegacy = :legacy)"+
-    "and (:game IS NULL OR m.game =:game)"
-    )
-    public Page<Mods> findSorted(Pageable page,@Param("name") String name,@Param("legacy") Boolean legacy,@Param("game") Integer game);
+    "and (:game IS NULL OR m.game =:game)")
+    public Page<Mods> findSorted(Pageable page,@Param("name") String name,@Param("game") Integer game);
 }
