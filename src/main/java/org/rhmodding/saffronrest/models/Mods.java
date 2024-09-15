@@ -26,6 +26,7 @@ public class Mods {
     private String video;
     private String slot;
     private Integer game;
+    private boolean featured;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category", referencedColumnName = "id")
@@ -38,5 +39,5 @@ public class Mods {
     private List<Files> files;
 
     @OneToMany(mappedBy = "mod")
-    private List<Files> pics;
+    private List<Pics> pics;
 }

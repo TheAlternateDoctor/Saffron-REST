@@ -1,0 +1,8 @@
+# Filepaths in which to look for
+saffron.filepath=/path/to/files
+saffron.picpath=/path/to/pics
+
+# Database setup
+spring.datasource.url = jdbc:mariadb://localhost:3306/saffron
+spring.datasource.username = saffron
+spring.datasource.password = saffron

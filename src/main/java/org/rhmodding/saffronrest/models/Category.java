@@ -1,6 +1,9 @@
 package org.rhmodding.saffronrest.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,8 +21,11 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    private int level;
+    private Integer level;
+    @Column(name = "parent", insertable=false, updatable=false)
+    private Integer parent;
+    @JsonIgnore
     @ManyToOne(cascade={CascadeType.ALL})
     @JoinColumn(name = "parent", referencedColumnName = "id")
-    private Category parent;
+    private Category parentCategory;
 }
